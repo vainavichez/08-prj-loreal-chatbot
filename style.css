@@ -7,6 +7,7 @@
 
 /* L'Oréal brand colors */
 :root {
+  --color-gold:#e3a535;
   --color-red: #ff003b;
   --color-white: #ffffff;
   --color-black: #000000;
@@ -68,13 +69,22 @@ body {
 .msg {
   margin-bottom: 14px;
   line-height: 1.5;
+  width: fit-content;
+  max-width: 85%;
+  padding: 10px 14px;
+  border-radius: 16px;
+  overflow-wrap: anywhere;
 }
 
 .msg.user {
+  margin-left: auto;
+  background-color: var(--color-red);
   color: var(--color-black);
 }
 
 .msg.ai {
+  margin-right: auto;
+  background-color: var(--color-gold);
   color: var(--color-black);
 }
 
@@ -99,7 +109,7 @@ body {
 
 .chat-form button {
   font-size: 18px;
-  background: var(--color-red);
+  background: var(--color-black);
   color: var(--color-white);
   border: none;
   padding: 12px;
