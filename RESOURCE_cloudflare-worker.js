@@ -17,10 +17,14 @@ export default {
     const apiKey = env.OPENAI_API_KEY; // Make sure to name your secret OPENAI_API_KEY in the Cloudflare Workers dashboard
     const apiUrl = 'https://api.openai.com/v1/chat/completions';
     const userInput = await request.json();
+    const systemPrompt = "You are L'Oréal's beauty assistant. Answer only questions about L'Oréal products, product recommendations, and beauty routines involving L'Oréal products. If a request is outside these topics, politely explain that you can only help with L'Oréal products and beauty routines, then invite an in-scope question. Do not invent product details; say when you are unsure.";
 
     const requestBody = {
       model: 'gpt-4o',
-      messages: userInput.messages,
+      messages: [
+        { role: 'system', content: systemPrompt },
+        ...userInput.messages.filter((message) => message.role === 'user' || message.role === 'assistant')
+      ],
       max_completion_tokens: 300,
     };
 
