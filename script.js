@@ -32,6 +32,12 @@ chatForm.addEventListener("submit", async (event) => {
   userInput.value = "";
   sendButton.disabled = true;
 
+  const waitingMessage = document.createElement("p");
+  waitingMessage.className = "msg ai";
+  waitingMessage.textContent = "L'Oréal Assistant: Waiting for response...";
+  chatWindow.appendChild(waitingMessage);
+  chatWindow.scrollTop = chatWindow.scrollHeight;
+
   const messages = [
     ...conversation,
     { role: "user", content: message },
@@ -58,13 +64,13 @@ chatForm.addEventListener("submit", async (event) => {
       { role: "user", content: message },
       { role: "assistant", content: reply },
     );
-    addMessage("ai", reply);
+    waitingMessage.textContent = `L'Oréal Assistant: ${reply}`;
+    chatWindow.scrollTop = chatWindow.scrollHeight;
   } catch (error) {
     console.error("Could not get a chat response:", error);
-    addMessage(
-      "ai",
-      "Sorry, I couldn't get a response. Please check your connection and try again.",
-    );
+    waitingMessage.textContent =
+      "L'Oréal Assistant: Sorry, I couldn't get a response. Please check your connection and try again.";
+    chatWindow.scrollTop = chatWindow.scrollHeight;
   } finally {
     sendButton.disabled = false;
   }
