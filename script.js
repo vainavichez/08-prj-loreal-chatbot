@@ -29,7 +29,7 @@ chatForm.addEventListener("submit", async (event) => {
   }
 
   // Keep the full history for the AI, but show only this question and reply.
-  chatWindow.replaceChildren();
+  chatWindow.replaceChildren(); // Clear the chat window to show only the current question and reply.
   addMessage("user", message);
   userInput.value = "";
   sendButton.disabled = true;
