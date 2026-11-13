@@ -25,7 +25,9 @@ export default {
         { role: 'system', content: systemPrompt },
         ...userInput.messages.filter((message) => message.role === 'user' || message.role === 'assistant')
       ],
-      max_completion_tokens: 300,
+      max_tokens: 800,
+      temperature: 0.5,
+      frequency_penalty: 0.5,
     };
 
     const response = await fetch(apiUrl, {
